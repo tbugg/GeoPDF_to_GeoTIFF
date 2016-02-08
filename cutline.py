@@ -13,4 +13,4 @@ f.write('id,WKT\n')
 f.write('1,"%s"\n' % neatline_wkt)
 f.close()
 
-os.system('gdalwarp %s %s.tif ' % (sys.argv[1], sys.argv[1]) + '-crop_to_cutline -cutline cutline.csv -overwrite')
+os.system('gdalwarp %s %s.tif --config GDAL_CACHEMAX 4096 -wm 500' % (sys.argv[1], sys.argv[1]) + '-crop_to_cutline -cutline cutline.csv -r cubic -overwrite -dstnodata 0 -dstalpha -co compress=deflate -co predictor=2 -co tiled=yes --config GDAL_PDF_DPI 400')
